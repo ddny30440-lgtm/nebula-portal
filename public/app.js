@@ -6,7 +6,7 @@ const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 //   2. localStorage override (set by user)
 //   3. on *.workers.dev: the dedicated tunnel host (Cloudflare Workers can't dial 80/443)
 //   4. otherwise same-origin /wisp/ (self-hosted single-server setup)
-const DEFAULT_TUNNEL = "wss://nebula-portal.onrender.com/wisp/";
+const DEFAULT_TUNNEL = "wss://flat-antelope-7222.ddny30440-lgtm.deno.net/wisp/";
 const qsWisp = new URLSearchParams(location.search).get("wisp");
 let wispUrl =
   qsWisp ||
