@@ -1,0 +1,23 @@
+{
+  "name": "nebula-portal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@mercuryworkshop/bare-mux": "^2.1.9",
+    "@mercuryworkshop/epoxy-transport": "^3.0.1",
+    "@titaniumnetwork-dev/ultraviolet": "^3.2.10",
+    "express": "^5.2.1",
+    "wisp-server-node": "^1.1.8"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}

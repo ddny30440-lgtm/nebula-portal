@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebula — Games &amp; Proxy</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>" />
+
+  <!-- Ultraviolet + BareMux (required for the proxy) -->
+  <script src="/uv/uv.bundle.js"></script>
+  <script src="/uv/uv.config.js"></script>
+  <script src="/baremux/index.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/uv/sw.js");
+      });
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo">🪐 <span>Nebula</span></div>
+    <nav>
+      <button class="tab active" data-tab="games">Games</button>
+      <button class="tab" data-tab="proxy">Proxy</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </nav>
+  </header>
+
+  <!-- ===== GAMES ===== -->
+  <main id="games" class="tabpane active">
+    <section class="games-grid" id="gamesGrid"></section>
+
+    <section id="gameStage" class="stage hidden">
+      <div class="stage-bar">
+        <button id="backBtn" class="stage-btn">← Back</button>
+        <div id="stageTitle" class="stage-title"></div>
+        <div class="stage-actions">
+          <button id="fullscreenBtn" class="stage-btn">⛶ Fullscreen</button>
+        </div>
+      </div>
+      <iframe id="gameFrame" class="stage-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+    </section>
+  </main>
+
+  <!-- ===== PROXY ===== -->
+  <main id="proxy" class="tabpane">
+    <form id="proxyForm" class="proxy-bar">
+      <input type="text" id="urlInput" placeholder="Search Google or enter a URL…" autocomplete="off" />
+      <button type="submit" id="goBtn">Go</button>
+    </form>
+    <div id="proxyStatus" class="proxy-status"></div>
+    <iframe id="proxyFrame" class="proxy-frame"></iframe>
+  </main>
+
+  <!-- ===== SETTINGS ===== -->
+  <main id="settings" class="tabpane">
+    <div class="settings-card">
+      <h2>Connection</h2>
+      <p>Transport mode for the proxy. Epoxy over Wisp is the default — it's what Interstellar uses too.</p>
+      <div class="transport-row">
+        <button id="epoxyBtn" class="transport active" data-t="epoxy">Epoxy (Wisp)</button>
+        <button id="reconnectBtn" class="transport">Reset transport</button>
+      </div>
+      <p id="transportStatus" class="muted"></p>
+    </div>
+    <div class="settings-card">
+      <h2>Games list</h2>
+      <p>The portal loads <code>games.json</code>. Add your own games there — name, emoji, and embed URL. If a game refuses to load in the frame, hit "Open via Proxy" and it goes through Ultraviolet instead.</p>
+    </div>
+  </main>
+
+  <footer>Nebula Portal · games + open web access</footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
