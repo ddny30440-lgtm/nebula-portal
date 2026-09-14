@@ -14,7 +14,7 @@
   "description": "",
   "dependencies": {
     "@mercuryworkshop/bare-mux": "^2.1.9",
-    "@mercuryworkshop/epoxy-transport": "^3.0.1",
+    "@mercuryworkshop/epoxy-transport": "^2.1.28",
     "@titaniumnetwork-dev/ultraviolet": "^3.2.10",
     "express": "^5.2.1",
     "wisp-server-node": "^1.1.8"
