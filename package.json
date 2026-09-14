@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "node build.mjs",
+    "deploy": "node build.mjs && wrangler deploy",
+    "dev": "wrangler dev"
   },
   "keywords": [],
   "author": "",

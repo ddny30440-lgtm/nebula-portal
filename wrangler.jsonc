@@ -1,0 +1,13 @@
+{
+  "name": "nebula-portal",
+  "compatibility_date": "2025-09-01",
+  "main": "worker/wisp.js",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": false
+  }
+}
