@@ -1,9 +1,20 @@
 /* ===== Nebula Portal client ===== */
 
 const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
-const wispUrl =
-  (location.protocol === "https:" ? "wss" : "ws") +
-  "://" + location.host + "/wisp/";
+// wisp tunnel endpoint, in priority order:
+//   1. ?wisp=wss://... query param
+//   2. localStorage override (set by user)
+//   3. on *.workers.dev: the dedicated tunnel host (Cloudflare Workers can't dial 80/443)
+//   4. otherwise same-origin /wisp/ (self-hosted single-server setup)
+const DEFAULT_TUNNEL = "wss://nebula-portal.onrender.com/wisp/";
+const qsWisp = new URLSearchParams(location.search).get("wisp");
+let wispUrl =
+  qsWisp ||
+  (function(){ try { return localStorage.getItem("wispUrl") || ""; } catch { return ""; } })() ||
+  (location.hostname.endsWith(".workers.dev")
+    ? DEFAULT_TUNNEL
+    : (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/");
+if (qsWisp) { try { localStorage.setItem("wispUrl", qsWisp); } catch {} }
 
 // set up transport (idempotent)
 async function ensureTransport() {
